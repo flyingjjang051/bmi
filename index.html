@@ -20,17 +20,23 @@
     <div class="fatCalculator">
       <input type="number" id="height" class="input" placeholder="키를 입력하세요. ex)180" />
       <input type="number" id="weight" class="input" placeholder="몸무게를 입력하세요. ex)85.3" />
-      <button>계산하기</button>
+      <button class="calc">계산하기</button>
+      <button class="reset">초기화</button>
       <div class="result"></div>
     </div>
     <script>
       // vanilla
-
       const height = document.querySelector("#height");
       const weight = document.querySelector("#weight");
-      const btn = document.querySelector(".fatCalculator button");
+      const calc = document.querySelector(".fatCalculator .calc");
+      const reset = document.querySelector(".fatCalculator .reset");
       const result = document.querySelector(".result");
-      btn.addEventListener("click", function () {
+      reset.addEventListener("click", function () {
+        height.value = "";
+        weight.value = "";
+        result.innerHTML = "";
+      });
+      calc.addEventListener("click", function () {
         const cm = parseInt(height.value) / 10;
         const kg = parseInt(weight.value);
         const bmi = (kg / cm ** 2) * 100;
