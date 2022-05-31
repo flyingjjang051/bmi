@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>비만도 계산기</title>
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link rel="stylesheet" href="css/common.css" />
+    <link rel="stylesheet" href="css/layout.css" />
+  </head>
+  <body>
+    <header id="header">
+      <h1>Fat <strong>Calculator</strong></h1>
+    </header>
+    <div class="fatCalculator">
+      <input type="number" id="height" class="input" placeholder="키를 입력하세요. ex)180" />
+      <input type="number" id="weight" class="input" placeholder="몸무게를 입력하세요. ex)85.3" />
+      <button>계산하기</button>
+      <div class="result"></div>
+    </div>
+    <script>
+      // vanilla
+
+      const height = document.querySelector("#height");
+      const weight = document.querySelector("#weight");
+      const btn = document.querySelector(".fatCalculator button");
+      const result = document.querySelector(".result");
+      btn.addEventListener("click", function () {
+        const cm = parseInt(height.value) / 10;
+        const kg = parseInt(weight.value);
+        const bmi = (kg / cm ** 2) * 100;
+        let bmiTxt = "";
+        let img = "";
+        if (bmi < 18.5) {
+          bmiTxt = "저체중";
+          img = "under";
+        } else if (bmi >= 18.5 && bmi < 22.9) {
+          bmiTxt = "정상";
+          img = "normal";
+        } else if (bmi >= 23 && bmi < 35) {
+          bmiTxt = "과체중";
+          img = "over";
+        } else {
+          bmiTxt = "고도비만";
+          img = "obese";
+        }
+        result.innerHTML = `<h1>당신의 체질량 지수 :  <strong>${bmi.toFixed(2)}</strong></h1> <img src="images/${img}.png"><p>${bmiTxt}</p>`;
+      });
+    </script>
+  </body>
+</html>
